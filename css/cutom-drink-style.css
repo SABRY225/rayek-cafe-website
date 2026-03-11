@@ -1,0 +1,331 @@
+:root {
+  --bg-color: #0d0907;
+  --card-bg: #1a1412;
+  --accent: #d35400;
+  --accent-hover: #e67e22;
+  --text-main: #f5f5f5;
+  --text-dim: #8e8e8e;
+  --cup-border: #4e342e;
+  --primary-color: #d35400;
+    --primary-light: rgba(211, 84, 0, 0.1);
+    --bg-glass: rgba(255, 255, 255, 0.8); /* للوضع الفاتح */
+    --border-color: rgba(211, 84, 0, 0.1);
+    --nav-height: 80px;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.main-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    direction: rtl;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+.nav-right-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* اللوجو */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    color: white;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: -0.02em;
+}
+
+/* الأزرار والأيقونات */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.icon-btn:hover {
+    background-color: var(--primary-light);
+}
+
+/* السلة والإشعار */
+.cart-btn {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-glass);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+.highlight {
+  color: var(--accent);
+}
+/* Main Layout */
+.main-content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+}
+
+/* Summary Card (Sticky) */
+.summary-card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Cup Visualization */
+.visualizer {
+  background: #251a15;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.cup {
+  width: 100px;
+  height: 130px;
+  border: 4px solid var(--cup-border);
+  margin: 0 auto;
+  border-radius: 5px 5px 40px 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+#ice-container {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-wrap: wrap;
+  padding: 8px;
+  gap: 2px;
+  z-index: 10;
+}
+.ice {
+  width: 18px;
+  height: 18px;
+  background: #a5d8ff;
+  border-radius: 3px;
+  opacity: 0.8;
+  box-shadow: 0 0 5px rgba(173, 216, 230, 0.5);
+}
+
+.layer {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+.foam-layer {
+  background: #fff9e6;
+  z-index: 4;
+  height: 0;
+}
+.flavor-layer {
+  background: transparent;
+  height: 0;
+  z-index: 3;
+}
+.milk-layer {
+  background: #fffde7;
+  z-index: 2;
+  height: 0;
+}
+.base-layer {
+  background: #3e2723;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+/* Pricing & Details */
+.details .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+.total-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  border-top: 2px solid var(--accent);
+  padding-top: 20px;
+}
+.price {
+  color: var(--accent);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* Options Steps */
+.step {
+  margin-bottom: 50px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 30px;
+  border-radius: 25px;
+}
+.step-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+.step-title span {
+  background: var(--accent);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.grid-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+/* Card Styling - Professional Icons */
+.card {
+  background: var(--card-bg);
+  padding: 20px 10px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  background: #221814;
+}
+.card.active {
+  border-color: var(--accent);
+  background: rgba(211, 84, 0, 0.1);
+}
+
+.icon {
+  font-size: 32px; /* Font Awesome Icons */
+  margin-bottom: 12px;
+  color: var(--accent);
+  display: block;
+}
+.custom-svg-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 12px auto;
+  display: block;
+}
+.card .name {
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+}
+.card .cost {
+  color: var(--accent);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.order-btn {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 30px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+.order-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2);
+}
+
+@media (max-width: 950px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  .summary-card {
+    position: static;
+    order: -1;
+  }
+}

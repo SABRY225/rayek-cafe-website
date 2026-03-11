@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كافيه الرايق | معمل القهوة الاحترافي</title>
+    <!-- Font Awesome 6 (Professional Icons) -->
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="main-navbar">
+        <div class="nav-content">
+            <div class="nav-right-section">
+                <div class="logo-wrapper">
+                    <div class="logo-icon">
+                        <i class="icon fas fa-mug-hot"></i>
+                    </div>
+                    <div class="logo-text"> كافيه الرايق</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <header class="header">
+        <div class="header-text">
+            <h1>جهز مشروبك <span class="highlight">على ذوقك</span></h1>
+            <p>اختر المكونات التي تفضلها لنصنع لك تجربة قهوة لا تُنسى</p>
+        </div>
+    </header>
+    <div class="container">
+
+
+        <div class="main-content">
+            <aside class="summary-card">
+                <div class="visualizer">
+                    <div class="cup">
+                        <div id="ice-container">
+                            <div class="ice"></div>
+                            <div class="ice"></div>
+                            <div class="ice"></div>
+                            <div class="ice"></div>
+                            <div class="ice"></div>
+                        </div>
+                        <div class="layer foam-layer" id="layer-foam"></div>
+                        <div class="layer flavor-layer" id="layer-flavor"></div>
+                        <div class="layer milk-layer" id="layer-milk"></div>
+                        <div class="layer base-layer" id="layer-base"></div>
+                    </div>
+                    <h3 id="drink-title" style="margin-top:20px; font-size: 18px;">مشروبك المخصص</h3>
+                </div>
+
+                <div class="details">
+                    <div class="row"><span>الأساس</span> <span id="sum-base">-</span></div>
+                    <div class="row"><span>الحليب</span> <span id="sum-milk">-</span></div>
+                    <div class="row"><span>الحرارة</span> <span id="sum-temp">-</span></div>
+                    <div class="row"><span>النكهة</span> <span id="sum-flavor">-</span></div>
+                    <div class="row"><span>الإضافة</span> <span id="sum-extra">-</span></div>
+                </div>
+
+                <div class="total-section">
+                    <span class="price" id="total-price">0 ر.س</span>
+                    <span>الإجمالي</span>
+                </div>
+                <button class="order-btn">تأكيد الطلب ☕</button>
+            </aside>
+
+            <section class="options-area">
+
+                <!-- Step 1: Base -->
+                <div class="step">
+                    <div class="step-title"><span>1</span> نوع القهوة (القاعدة)</div>
+                    <div class="grid-options">
+                        <div class="card active" data-type="base" data-name="إسبريسو" data-price="15"
+                            data-color="#3e2723">
+                            <i class="icon fas fa-mug-hot"></i>
+                            <span class="name">إسبريسو</span><span class="cost">15 ر.س</span>
+                        </div>
+                        <div class="card" data-type="base" data-name="ماتشا" data-price="22" data-color="#4f7942">
+                            <i class="icon fas fa-leaf" style="color: #7CB342;"></i>
+                            <span class="name">ماتشا ياباني</span><span class="cost">22 ر.س</span>
+                        </div>
+                        <div class="card" data-type="base" data-name="شوكولاتة" data-price="18" data-color="#3d2b1f">
+                            <i class="icon fas fa-candy-cane"></i>
+                            <span class="name">شوكولاتة</span><span class="cost">18 ر.س</span>
+                        </div>
+                        <div class="card" data-type="base" data-name="V60" data-price="25" data-color="#5d4037">
+                            <i class="icon fas fa-filter"></i>
+                            <span class="name">قهوة V60</span><span class="cost">25 ر.س</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Milk -->
+                <div class="step">
+                    <div class="step-title"><span>2</span> نوع الحليب</div>
+                    <div class="grid-options">
+                        <div class="card active" data-type="milk" data-name="كامل الدسم" data-price="0">
+                            <i class="icon fas fa-jug-detergent"></i>
+                            <span class="name">كامل الدسم</span><span class="cost">0 ر.س</span>
+                        </div>
+                        <div class="card" data-type="milk" data-name="حليب لوز" data-price="7">
+                            <i class="icon fas fa-seedling"></i>
+                            <span class="name">حليب لوز</span><span class="cost">+7 ر.س</span>
+                        </div>
+                        <div class="card" data-type="milk" data-name="حليب شوفان" data-price="7">
+                            <i class="icon fas fa-wheat-alt"></i>
+                            <span class="name">حليب شوفان</span><span class="cost">+7 ر.س</span>
+                        </div>
+                        <div class="card" data-type="milk" data-name="بدون حليب" data-price="0">
+                            <i class="icon fas fa-ban"></i>
+                            <span class="name">بدون حليب</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Temperature -->
+                <div class="step">
+                    <div class="step-title"><span>3</span> درجة الحرارة</div>
+                    <div class="grid-options">
+                        <div class="card active" data-type="temp" data-name="حار" data-price="0">
+                            <i class="icon fas fa-temperature-high"></i>
+                            <span class="name">حار</span>
+                        </div>
+                        <div class="card" data-type="temp" data-name="بارد" data-price="3">
+                            <i class="icon fas fa-snowflake"></i>
+                            <span class="name">بارد 🧊</span><span class="cost">+3 ر.س</span>
+                        </div>
+                        <div class="card" data-type="temp" data-name="فرايب" data-price="5">
+                            <i class="icon fas fa-blender"></i>
+                            <span class="name">مخفوق</span><span class="cost">+5 ر.س</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Flavors -->
+                <div class="step">
+                    <div class="step-title"><span>4</span> نكهات إضافية</div>
+                    <div class="grid-options">
+                        <div class="card active" data-type="flavor" data-name="سادة" data-price="0"
+                            data-color="transparent">
+                            <i class="icon fas fa-times-circle"></i>
+                            <span class="name">سادة</span>
+                        </div>
+                        <div class="card" data-type="flavor" data-name="كراميل" data-price="5" data-color="#d4a373">
+                            <i class="icon fas fa-candy-cane"></i>
+                            <span class="name">كراميل</span><span class="cost">+5 ر.س</span>
+                        </div>
+                        <div class="card" data-type="flavor" data-name="فانيليا" data-price="5" data-color="#fefae0">
+                            <i class="icon fas fa-ice-cream"></i>
+                            <span class="name">فانيليا</span><span class="cost">+5 ر.س</span>
+                        </div>
+                        <div class="card" data-type="flavor" data-name="بندق" data-price="5" data-color="#bc6c25">
+                            <i class="icon fas fa-bacon"></i>
+                            <span class="name">بندق</span><span class="cost">+5 ر.س</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Extras -->
+                <div class="step">
+                    <div class="step-title"><span>5</span> اللمسة النهائية</div>
+                    <div class="grid-options">
+                        <div class="card" data-type="extra" data-name="رغوة مكثفة" data-price="4">
+                            <i class="icon fas fa-cloud"></i>
+                            <span class="name">رغوة</span><span class="cost">+4 ر.س</span>
+                        </div>
+                        <div class="card" data-type="extra" data-name="كريمة مخفوقة" data-price="6">
+                            <i class="icon fas fa-whiskey-glass"></i>
+                            <span class="name">كريمة</span><span class="cost">+6 ر.س</span>
+                        </div>
+                        <div class="card" data-type="extra" data-name="صوص شوكولاتة" data-price="4">
+                            <i class="icon fas fa-droplet"></i>
+                            <span class="name">صوص</span><span class="cost">+4 ر.س</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
