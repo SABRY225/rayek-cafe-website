@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        var param = new URLSearchParams(location.search);
+        var id = param.get('id');
+
+        var Xhr = new XMLHttpRequest();
+        Xhr.open("GET","https://server.coffee.intelakah.com/api/drinks/"+id);
+        Xhr.responseType = "json";
+        Xhr.send();
+
+        Xhr.onload = function () {
+            var all_Drinks = Xhr.response;
+
+
+
+            let container = document.createElement("div");
+            container.id = "drink-container";
+            let image = document.createElement("img");
+            image.className = "drink-image";
+            image.src = all_Drinks.image
+
+
+            let description = document.createElement("h6");
+            description.className = "drink_discrption"
+            description.textContent = all_Drinks.description
+            let price = document.createElement("h4");
+            price.className = "stock-status";
+            price.textContent = all_Drinks.price
+
+
+            container.append(image, description, price);
+            document.body.append(container);
+
+        }
+    </script>
+
+</body>
+
+</html>
