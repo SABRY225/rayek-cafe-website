@@ -72,3 +72,37 @@ document.getElementById("searchinput").addEventListener("input", function (e) {
 
     Displaydrinks(filtered);
 });
+
+
+var Ctegory = [];
+let all = document.getElementById("all");
+let hotButton = document.getElementById("hot");
+let coldButton = document.getElementById("cold");
+
+all.addEventListener("click", function() {
+    Ctegory = [];
+    for (let drink of Drinks) {
+        Ctegory.push(drink);
+    }
+    Displaydrinks(Ctegory);
+});
+
+hotButton.addEventListener("click", function() {
+    Ctegory = [];
+    for (let drink of Drinks) {
+        if (drink.temperature == "ساخن") {
+            Ctegory.push(drink);
+        }
+    }
+    Displaydrinks(Ctegory);
+});
+
+coldButton.addEventListener("click", function() {
+    Ctegory = [];
+    for (let drink of Drinks) {
+        if (drink.temperature == "بارد") {
+            Ctegory.push(drink);
+        }
+    }
+    Displaydrinks(Ctegory);
+});
