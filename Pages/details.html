@@ -5,45 +5,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/details.css">
 </head>
 
 <body>
 
+
+
+
     <script>
 
-        var param = new URLSearchParams(location.search);
-        var id = param.get('id');
+       var param = new URLSearchParams(location.search);
+var id = param.get('id');
 
-        var Xhr = new XMLHttpRequest();
-        Xhr.open("GET","https://server.coffee.intelakah.com/api/drinks/"+id);
-        Xhr.responseType = "json";
-        Xhr.send();
+var Xhr = new XMLHttpRequest();
+Xhr.open("GET", "https://server.coffee.intelakah.com/api/drinks/" + id);
+Xhr.responseType = "json";
+Xhr.send();
 
-        Xhr.onload = function () {
-            var all_Drinks = Xhr.response;
+Xhr.onload = function () {
+    var drink = Xhr.response;
 
+    console.log(drink);
 
+    if (!drink) {
+        document.body.innerHTML = "<h1>المشروب غير موجود</h1>";
+        return;
+    }
 
-            let container = document.createElement("div");
-            container.id = "drink-container";
-            let image = document.createElement("img");
-            image.className = "drink-image";
-            image.src = all_Drinks.image
+    const drinkHTML = `
+        <div id="drink-container">
+            <img src="${drink.image}" class="drink-image" alt="${drink.name}">
+            <h4 class="drink_name">${drink.name}</h4>
+            <h6 class="drink_discrption">${drink.description}</h6>
+            <h4 class="drink-price">${drink.price} EGP</h4>
+        </div>
 
+        <h2 class="detilsh1">الحجم</h2>
+        
+        <div class="size-buttons">
+            <button class="size-btn">كبير</button>
+            <button class="size-btn">متوسط</button>
+            <button class="size-btn">صغير</button>
+        </div>
 
-            let description = document.createElement("h6");
-            description.className = "drink_discrption"
-            description.textContent = all_Drinks.description
-            let price = document.createElement("h4");
-            price.className = "stock-status";
-            price.textContent = all_Drinks.price
+     <div class="cart-controls">
+        <div class="quantity-selector">
+            <button class="qty-btn " id="minus">-</button>
+            <input type="number" id="qty-input" value="1" min="1">
+            <button class="qty-btn" id="plus">+</button>
+        </div>
+        <button class="add-to-cart">إضافة للسلة</button>
+    </div>
+        
+    `;
+    
+   
 
+    document.body.innerHTML = drinkHTML;
+      // بعد ما الـ HTML يظهر نضيف الأحداث
 
-            container.append(image, description, price);
-            document.body.append(container);
+    document.getElementById("plus").onclick = function () {
+        let qty = document.getElementById("qty-input");
+        qty.value = parseInt(qty.value) + 1;
+    };
 
+    document.getElementById("minus").onclick = function () {
+        let qty = document.getElementById("qty-input");
+
+        if (qty.value > 1) {
+            qty.value = parseInt(qty.value) - 1;
         }
+    };
+
+
+}
+
+
     </script>
+
 
 </body>
 

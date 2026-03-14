@@ -9,31 +9,143 @@ body {
 }
 
 #drink-container {
-  width: 90%;
-  max-width: 600px;
   text-align: center;
   margin-bottom: 30px;
+  max-width: 1000px;
 }
 
-.drinkImage {
-  width: 100%; /* Responsive */
-  max-width: 400px;
-  height: auto;
-  border-radius: 15px;
-  object-fit: cover;
+.drink-image{
+  width:100%;
+  max-width:1000px;
 }
 
-.drinkPrice {
-  color: #f39c12; /* Gold color for price */
-  font-size: 1.5rem;
+.drink_name{
+  font-size: 40px;
+  font-family: serif;
 }
 
-.sizeselection button {
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  background: #333;
-  color: white;
-  border: 1px solid #555;
-  border-radius: 5px;
+.drink-price{
+ 
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 18px;
+
+width: 100px; 
+
+margin: 15px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+background-color:#d17842;
+  transition: 0.3s;
+}
+
+.drink-price:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+}
+
+.drink_discrption{
+  color: rgba(245, 245, 220, 0.781);
+  font-size: 20px;
+}
+
+.detilsh1{
+  margin-top:20px;
+  color: rgb(228, 228, 215);
+}
+
+
+.size-buttons{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-top:20px;
+}
+
+.size-btn {
+    background-color: transparent;
+    border: 1px solid #555;  
+    color: #fff;
+    width:200px;           
+    height:45px;
+    border-radius:8px;    
+    cursor:pointer;
+    font-size:1.1rem;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.size-btn.active {
+    border:2px solid #b5835a; 
+    background-color:rgba(181, 131, 90, 0.1);
+    color:#b5835a;
+}
+
+.size-btn:hover {
+    border-color:#b5835a;
+}
+
+
+.cart-controls {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-top:80px;
+    width:100%;
+    max-width:1000px;
+}
+
+
+.quantity-selector {
+    display:flex;
+    align-items:center;
+    border:1px solid #ddd;
+    border-radius:5px;
+    overflow:hidden;
+    order:2; 
+}
+
+.qty-btn {
+    padding:10px 20px;
+    font-size:1.2rem;
+    cursor:pointer;
+    transition:0.3s;
+    background-color:#121212;
+    color:wheat;
+    border:none;
+}
+
+.qty-btn:hover {
+    background:#b5835a;
+}
+
+#qty-input {
+    width:50px;
+    text-align:center;
+    border:none;
+    outline:none;
+    color:#fff;
+  
+  background-color: #121212;;
+}
+
+
+.add-to-cart {
+    background:#d17842;
+    color:white;
+    border:none;
+    padding:12px 40px;
+    border-radius:25px;
+    font-size:1.1rem;
+    font-weight:bold;
+    cursor:pointer;
+  
+    width: 500px;
+    margin-left: 230px;
+}
+.add-to-cart:hover{
+
+  scale: 10px ;
+  background-color: #b5835a;
 }

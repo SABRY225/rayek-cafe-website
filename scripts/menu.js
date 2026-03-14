@@ -51,7 +51,6 @@ let imageWrapper = document.createElement("div");
         
         addBtn.onclick = function(e) {
             e.preventDefault();
-            alert("تمت الإضافة للسلة!");
         };
 
         priceRow.append(priceTag, addBtn);
