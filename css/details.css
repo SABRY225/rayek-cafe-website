@@ -104,6 +104,7 @@ background-color:#d17842;
     border-radius:5px;
     overflow:hidden;
     order:2; 
+    margin-top: -8px;
 }
 
 .qty-btn {
@@ -114,6 +115,7 @@ background-color:#d17842;
     background-color:#121212;
     color:wheat;
     border:none;
+
 }
 
 .qty-btn:hover {
