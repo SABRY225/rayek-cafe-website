@@ -8,26 +8,58 @@ let Drinks = [];
 Xhr.onload = function () {
     Drinks = Xhr.response;
     Displaydrinks(Drinks);
-}
+};
 
 function Displaydrinks(drink) {
+
     let container = document.getElementById("DrinksContainer");
     container.innerHTML = "";
 
     for (let item of drink) {
+
         let card = document.createElement("a");
         card.className = "card";
-card.href = "./details.html?id=" + item.id;
-let imageWrapper = document.createElement("div");
+        card.href = "./details.html?id=" + item.id;
+
+        let imageWrapper = document.createElement("div");
         imageWrapper.className = "image-wrapper";
 
         let Drinkmg = document.createElement("img");
         Drinkmg.className = "image";
         Drinkmg.src = item.image;
 
-        let heartIcon = document.createElement("div");
+        let heartIcon = document.createElement("button");
         heartIcon.className = "heart-icon";
-        heartIcon.innerHTML = '❤';
+        heartIcon.innerHTML = "❤";
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) ;
+
+        let exist = favorites.find(fav => fav.id === item.id);
+        if (exist) {
+            heartIcon.style.color = "red";
+        }
+
+     heartIcon.onclick = function(e){
+
+    e.preventDefault();
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")) ;
+
+    let exist = favorites.find(f => f.id == item.id);
+
+    if(exist){
+
+        favorites = favorites.filter(f => f.id != item.id);
+        heartIcon.style.color = "black";
+
+    }else{
+
+        favorites.push(item);
+        heartIcon.style.color = "red";
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
 
         imageWrapper.append(Drinkmg, heartIcon);
 
@@ -38,29 +70,18 @@ let imageWrapper = document.createElement("div");
         description.className = "description";
         description.textContent = item.description;
 
-        let priceRow = document.createElement("div");
-        priceRow.className = "price-row";
+    
+    ;
 
-        let priceTag = document.createElement("span");
-        priceTag.className = "price-tag";
-        priceTag.textContent = item.price + " $";
-
-        let addBtn = document.createElement("button");
-        addBtn.className = "add-btn";
-        addBtn.textContent = "+";
-        
-        addBtn.onclick = function(e) {
-            e.preventDefault();
-            alert("تمت الإضافة للسلة!");
-        };
-
-        priceRow.append(priceTag, addBtn);
-        card.append(imageWrapper, title, description, priceRow);
+        card.append(imageWrapper, title, description);
         container.append(card);
     }
 }
 
+
+// search
 document.getElementById("searchinput").addEventListener("input", function (e) {
+
     let searchValue = e.target.value.toLowerCase();
     let filtered = [];
 
@@ -74,35 +95,49 @@ document.getElementById("searchinput").addEventListener("input", function (e) {
 });
 
 
+// category filter
 var Ctegory = [];
+
 let all = document.getElementById("all");
 let hotButton = document.getElementById("hot");
 let coldButton = document.getElementById("cold");
 
-all.addEventListener("click", function() {
+
+all.addEventListener("click", function () {
+
     Ctegory = [];
+
     for (let drink of Drinks) {
         Ctegory.push(drink);
     }
+
     Displaydrinks(Ctegory);
 });
 
-hotButton.addEventListener("click", function() {
+
+hotButton.addEventListener("click", function () {
+
     Ctegory = [];
+
     for (let drink of Drinks) {
         if (drink.temperature == "ساخن") {
             Ctegory.push(drink);
         }
     }
+
     Displaydrinks(Ctegory);
 });
 
-coldButton.addEventListener("click", function() {
+
+coldButton.addEventListener("click", function () {
+
     Ctegory = [];
+
     for (let drink of Drinks) {
         if (drink.temperature == "بارد") {
             Ctegory.push(drink);
         }
     }
+
     Displaydrinks(Ctegory);
 });
