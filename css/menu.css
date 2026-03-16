@@ -89,7 +89,7 @@ body {
 }
 
 .card {
-    flex: 0 1 calc(33.33%); 
+    flex: 0 1 calc(20.33%); 
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 25px;
     padding: 12px;
