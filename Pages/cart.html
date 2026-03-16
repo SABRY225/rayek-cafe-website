@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة التسوق</title>
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+</head>
+<body>
+
+  
+
+    <h1 class="carttext">سلة التسوق</h1>
+    <hr class="hr">
+
+    <div id="cart-container"></div>
+    <div class="total" id="total-price">السعر الكلي: 0 EGP</div>
+    <a href="" class="completeorder"> إتمام الطلب</a>
+
+ 
+<footer class="footer">
+       <a href="menu.html" class="footer-item" id="nav-home">
+        <i class="fas fa-home"></i>
+        <span>القائمة</span>
+    </a>
+   
+    <a href="cart.html" class="footer-item" id="nav-cart">
+        <div class="footer-icon-wrapper">
+            <i class="fas fa-shopping-cart"></i>
+ 
+        </div>
+        <span>السلة</span>
+    </a>
+    <a href="fav.html" class="footer-item" id="nav-wishlist">
+        <i class="fas fa-heart"></i>
+        <span>المفضلة</span>
+    </a>
+ 
+</footer>
+
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartContainer = document.getElementById("cart-container");
+const totalPriceEl = document.getElementById("total-price");
+
+
+
+function showcart() {
+    cartContainer.innerHTML = "";
+    let total = 0;
+    let totalItems = 0; 
+
+    for (let index = 0; index < cart.length; index++) {
+        let item = cart[index];
+        total += item.price * item.quantity;
+        totalItems += item.quantity;
+
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+
+        itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>السعر: ${item.price} EGP</p>
+
+                <div class="quantity-controls">
+                    <button onclick="decreaseQty(${index})">-</button>
+                    <input type="number" value="${item.quantity}" min="1" readonly>
+                    <button onclick="increaseQty(${index})">+</button>
+                </div>
+            </div>
+            <button class="remove-btn" onclick="removeItem(${index})">حذف</button>
+        `;
+        cartContainer.appendChild(itemDiv);
+    }
+
+    totalPriceEl.textContent = "السعر الكلي: " + total + " EGP";
+    document.getElementById('side-cart-count').textContent = totalItems;
+}
+
+function increaseQty(index) {
+    cart[index].quantity += 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showcart();
+}
+
+function decreaseQty(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        showcart();
+    }
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showcart();
+}
+
+showcart();
+</script>
+</body>
+</html>

@@ -1,90 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>تفاصيل المشروب</title>
     <link rel="stylesheet" href="../css/details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
-
-
+    <div id="main-content"></div>
 
     <script>
+        var param = new URLSearchParams(location.search);
+        var id = param.get('id');
 
-       var param = new URLSearchParams(location.search);
-var id = param.get('id');
+        var Xhr = new XMLHttpRequest();
+        Xhr.open("GET", "https://server.coffee.intelakah.com/api/drinks/" + id);
+        Xhr.responseType = "json";
+        Xhr.send();
 
-var Xhr = new XMLHttpRequest();
-Xhr.open("GET", "https://server.coffee.intelakah.com/api/drinks/" + id);
-Xhr.responseType = "json";
-Xhr.send();
+        Xhr.onload = function () {
+            var drink = Xhr.response;
 
-Xhr.onload = function () {
-    var drink = Xhr.response;
+            if (!drink) {
+                document.body.innerHTML = "<h1 style='text-align:center; color:white; margin-top:50px;'>المشروب غير موجود</h1>";
+                return;
+            }
 
-    console.log(drink);
 
-    if (!drink) {
-        document.body.innerHTML = "<h1>المشروب غير موجود</h1>";
-        return;
-    }
+            const drinkHTML = `
+            <div id="drink-container">
+                <img src="${drink.image}" class="drink-image" alt="${drink.name}">
+                
+                <div class="content-wrapper">
+                    <h1 class="drink_name">${drink.name}</h1>
+                    <p class="drink_discrption">${drink.description}</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <i class="fas fa-thermometer-half"></i>
+                            <span>النكهة</span>
+                            <p>${drink.syrup}</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-blender"></i>
+                            <span>الحليب</span>
+                            <p>${drink.milk || 'بدون'}</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-cookie-bite"></i>
+                            <span>إضافات</span>
+                            <p>${drink.toppings || 'سادة'}</p>
+                        </div>
+                    </div>
 
-    const drinkHTML = `
-        <div id="drink-container">
-            <img src="${drink.image}" class="drink-image" alt="${drink.name}">
-            <h4 class="drink_name">${drink.name}</h4>
-            <h6 class="drink_discrption">${drink.description}</h6>
-            <h4 class="drink-price">${drink.price} EGP</h4>
-        </div>
+                    <h4 class="drink-price">${drink.price} EGP</h4>
 
-        <h2 class="detilsh1">الحجم</h2>
-        
-        <div class="size-buttons">
-            <button class="size-btn">كبير</button>
-            <button class="size-btn">متوسط</button>
-            <button class="size-btn">صغير</button>
-        </div>
+                    <h2 class="detilsh1">الحجم</h2>
+                    <div class="size-buttons">
+                        <button class="size-btn">كبير</button>
+                        <button class="size-btn active">متوسط</button>
+                        <button class="size-btn">صغير</button>
+                    </div>
 
-     <div class="cart-controls">
-        <div class="quantity-selector">
-            <button class="qty-btn " id="minus">-</button>
-            <input type="number" id="qty-input" value="1" min="1">
-            <button class="qty-btn" id="plus">+</button>
-        </div>
-        <button class="add-to-cart">إضافة للسلة</button>
-    </div>
-        
-    `;
-    
-   
+                    <div class="cart-controls">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="minus">-</button>
+                            <input type="number" id="qty-input" value="1" min="1" readonly>
+                            <button class="qty-btn" id="plus">+</button>
+                        </div>
+                        <button class="add-to-cart" id="addtocart">إضافة للسلة</button>
+                    </div>
+                </div>
+            </div>
 
-    document.body.innerHTML = drinkHTML;
-      // بعد ما الـ HTML يظهر نضيف الأحداث
+            <footer class="footer-nav">
+                <a href="menu.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>القائمة</span>
+                </a>
+                <a href="cart.html" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>السلة</span>
+                </a>
+                <a href="fav.html" class="nav-item">
+                    <i class="fas fa-heart"></i>
+                    <span>المفضلة</span>
+                </a>
+            </footer>
+            `;
 
-    document.getElementById("plus").onclick = function () {
-        let qty = document.getElementById("qty-input");
-        qty.value = parseInt(qty.value) + 1;
-    };
+            document.getElementById("main-content").innerHTML = drinkHTML;
 
-    document.getElementById("minus").onclick = function () {
-        let qty = document.getElementById("qty-input");
+            // أزرار الكمية
+            document.getElementById("plus").onclick = () => {
+                let qty = document.getElementById("qty-input");
+                qty.value = parseInt(qty.value) + 1;
+            };
 
-        if (qty.value > 1) {
-            qty.value = parseInt(qty.value) - 1;
+            document.getElementById("minus").onclick = () => {
+                let qty = document.getElementById("qty-input");
+                if (qty.value > 1) qty.value = parseInt(qty.value) - 1;
+            };
+
+            // إضافة للسلة
+            document.getElementById("addtocart").onclick = function () {
+                let quantity = parseInt(document.getElementById("qty-input").value);
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let exist = cart.findIndex(item => item.id === drink.id);
+                
+                if (exist !== -1) {
+                    cart[exist].quantity += quantity;
+                } else {
+                    cart.push({
+                        id: drink.id,
+                        name: drink.name,
+                        image: drink.image,
+                        quantity: quantity,
+                        price: drink.price
+                    });
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+                window.location.href = "cart.html";
+            };
         }
-    };
-
-
-}
-
-
     </script>
-
-
 </body>
-
 </html>
