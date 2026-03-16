@@ -1,31 +1,32 @@
 document.getElementById("btnSubmit").addEventListener("click", function () {
 
-var emailsend = document.getElementById("email").value
+  const btn = document.getElementById("btnSubmit");
+  const emailsend = document.getElementById("email").value;
 
-var xhr = new XMLHttpRequest()
+  btn.disabled = true;
+  btn.innerText = "جاري الإرسال...";
 
-xhr.open("POST", "https://server.coffee.intelakah.com/api/auth/login")
+  var xhr = new XMLHttpRequest();
 
-xhr.setRequestHeader("Content-Type", "application/json")
+  xhr.open("POST", "https://server.coffee.intelakah.com/api/auth/login");
+  xhr.setRequestHeader("Content-Type", "application/json");
 
-xhr.send(JSON.stringify({ email: emailsend }))
+  xhr.send(JSON.stringify({ email: emailsend }));
 
-xhr.onload = function () {
+  xhr.onload = function () {
 
-var data = JSON.parse(xhr.responseText)
+    btn.disabled = false;
+    btn.innerText = "تسجيل الدخول";
 
-if (data.status == 404) {
+    var data = JSON.parse(xhr.responseText);
 
-alert(data.message)
+    if (data.status == 404) {
+      alert(data.message);
+    } else {
+      localStorage.setItem("gmail", emailsend);
+      window.location.href = `verify.html`;
+    }
 
-} else {
-
-localStorage.setItem("gmail", emailsend)
-
-window.location.href = `verify.html`
-
-}
-
-};
+  };
 
 });

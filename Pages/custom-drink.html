@@ -41,7 +41,6 @@
                             <div class="ice"></div>
                             <div class="ice"></div>
                             <div class="ice"></div>
-                            <div class="ice"></div>
                         </div>
                         <div class="layer foam-layer" id="layer-foam"></div>
                         <div class="layer flavor-layer" id="layer-flavor"></div>
@@ -60,10 +59,10 @@
                 </div>
 
                 <div class="total-section">
-                    <span class="price" id="total-price">0 ر.س</span>
+                    <span class="price" id="total-price">0 ج.م</span>
                     <span>الإجمالي</span>
                 </div>
-                <button class="order-btn">تأكيد الطلب ☕</button>
+                <button class="order-btn" id="order-btn">تأكيد الطلب ☕</button>
             </aside>
 
             <section class="options-area">
@@ -75,19 +74,19 @@
                         <div class="card active" data-type="base" data-name="إسبريسو" data-price="15"
                             data-color="#3e2723">
                             <i class="icon fas fa-mug-hot"></i>
-                            <span class="name">إسبريسو</span><span class="cost">15 ر.س</span>
+                            <span class="name">إسبريسو</span><span class="cost">15 ج.م</span>
                         </div>
                         <div class="card" data-type="base" data-name="ماتشا" data-price="22" data-color="#4f7942">
                             <i class="icon fas fa-leaf" style="color: #7CB342;"></i>
-                            <span class="name">ماتشا ياباني</span><span class="cost">22 ر.س</span>
+                            <span class="name">ماتشا ياباني</span><span class="cost">22 ج.م</span>
                         </div>
                         <div class="card" data-type="base" data-name="شوكولاتة" data-price="18" data-color="#3d2b1f">
                             <i class="icon fas fa-candy-cane"></i>
-                            <span class="name">شوكولاتة</span><span class="cost">18 ر.س</span>
+                            <span class="name">شوكولاتة</span><span class="cost">18 ج.م</span>
                         </div>
                         <div class="card" data-type="base" data-name="V60" data-price="25" data-color="#5d4037">
                             <i class="icon fas fa-filter"></i>
-                            <span class="name">قهوة V60</span><span class="cost">25 ر.س</span>
+                            <span class="name">قهوة V60</span><span class="cost">25 ج.م</span>
                         </div>
                     </div>
                 </div>
@@ -98,15 +97,15 @@
                     <div class="grid-options">
                         <div class="card active" data-type="milk" data-name="كامل الدسم" data-price="0">
                             <i class="icon fas fa-jug-detergent"></i>
-                            <span class="name">كامل الدسم</span><span class="cost">0 ر.س</span>
+                            <span class="name">كامل الدسم</span><span class="cost">0 ج.م</span>
                         </div>
                         <div class="card" data-type="milk" data-name="حليب لوز" data-price="7">
                             <i class="icon fas fa-seedling"></i>
-                            <span class="name">حليب لوز</span><span class="cost">+7 ر.س</span>
+                            <span class="name">حليب لوز</span><span class="cost">+7 ج.م</span>
                         </div>
                         <div class="card" data-type="milk" data-name="حليب شوفان" data-price="7">
                             <i class="icon fas fa-wheat-alt"></i>
-                            <span class="name">حليب شوفان</span><span class="cost">+7 ر.س</span>
+                            <span class="name">حليب شوفان</span><span class="cost">+7 ج.م</span>
                         </div>
                         <div class="card" data-type="milk" data-name="بدون حليب" data-price="0">
                             <i class="icon fas fa-ban"></i>
@@ -125,11 +124,11 @@
                         </div>
                         <div class="card" data-type="temp" data-name="بارد" data-price="3">
                             <i class="icon fas fa-snowflake"></i>
-                            <span class="name">بارد 🧊</span><span class="cost">+3 ر.س</span>
+                            <span class="name">بارد 🧊</span><span class="cost">+3 ج.م</span>
                         </div>
                         <div class="card" data-type="temp" data-name="فرايب" data-price="5">
                             <i class="icon fas fa-blender"></i>
-                            <span class="name">مخفوق</span><span class="cost">+5 ر.س</span>
+                            <span class="name">مخفوق</span><span class="cost">+5 ج.م</span>
                         </div>
                     </div>
                 </div>
@@ -145,15 +144,15 @@
                         </div>
                         <div class="card" data-type="flavor" data-name="كراميل" data-price="5" data-color="#d4a373">
                             <i class="icon fas fa-candy-cane"></i>
-                            <span class="name">كراميل</span><span class="cost">+5 ر.س</span>
+                            <span class="name">كراميل</span><span class="cost">+5 ج.م</span>
                         </div>
                         <div class="card" data-type="flavor" data-name="فانيليا" data-price="5" data-color="#fefae0">
                             <i class="icon fas fa-ice-cream"></i>
-                            <span class="name">فانيليا</span><span class="cost">+5 ر.س</span>
+                            <span class="name">فانيليا</span><span class="cost">+5 ج.م</span>
                         </div>
                         <div class="card" data-type="flavor" data-name="بندق" data-price="5" data-color="#bc6c25">
                             <i class="icon fas fa-bacon"></i>
-                            <span class="name">بندق</span><span class="cost">+5 ر.س</span>
+                            <span class="name">بندق</span><span class="cost">+5 ج.م</span>
                         </div>
                     </div>
                 </div>
@@ -164,21 +163,32 @@
                     <div class="grid-options">
                         <div class="card" data-type="extra" data-name="رغوة مكثفة" data-price="4">
                             <i class="icon fas fa-cloud"></i>
-                            <span class="name">رغوة</span><span class="cost">+4 ر.س</span>
+                            <span class="name">رغوة</span><span class="cost">+4 ج.م</span>
                         </div>
                         <div class="card" data-type="extra" data-name="كريمة مخفوقة" data-price="6">
                             <i class="icon fas fa-whiskey-glass"></i>
-                            <span class="name">كريمة</span><span class="cost">+6 ر.س</span>
+                            <span class="name">كريمة</span><span class="cost">+6 ج.م</span>
                         </div>
                         <div class="card" data-type="extra" data-name="صوص شوكولاتة" data-price="4">
                             <i class="icon fas fa-droplet"></i>
-                            <span class="name">صوص</span><span class="cost">+4 ر.س</span>
+                            <span class="name">صوص</span><span class="cost">+4 ج.م</span>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
+    <div id="orderModal" class="modal">
+  <div class="modal-content">
+    <h2>بيانات العميل</h2>
+    <input type="text" id="customerName" placeholder="اسم العميل"  />
+    <input type="tel" id="customerPhone" placeholder="رقم الهاتف"/>
+    <div class="btns">
+    <button id="btn-close">الغاء الطلب</button>
+        <button id="btn-confirm">تأكيد الطلب</button>
+    </div>
+  </div>
+</div>
     <script src="../scripts/custom-drink-script.js"></script>
 </body>
 
