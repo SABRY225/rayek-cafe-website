@@ -30,7 +30,6 @@ function loadDrinksFromAPI() {
     makeRequest('GET', drinksApiUrl, null, function (success, result) {
         if (success) {
             drinks = Array.isArray(result) ? result : [];
-            console.log('Drinks loaded:', drinks.length);
         } else {
             drinks = [];
             showNotification('فشل تحميل المشروبات', 'error');
@@ -43,7 +42,6 @@ function loadOrdersFromAPI() {
     makeRequest('GET', ordersApiUrl, null, function (success, result) {
         if (success) {
             orders = Array.isArray(result) ? result : (result.orders || []);
-            console.log('Orders loaded:', orders.length);
         } else {
             orders = [];
             showNotification('فشل تحميل الطلبات', 'error');
@@ -59,7 +57,6 @@ function loadStatsFromAPI() {
                 Object.entries(result).filter(([key]) => key !== "")
             );
             stats = cleanStats;
-            console.log('Stats loaded:', stats);
         } else {
             stats = {};
             showNotification('فشل تحميل الإحصائيات', 'error');
@@ -119,7 +116,6 @@ function updateOrderStatusAPI(orderId, newStatus, newType, callback) {
         status: newStatus 
     };
     
-    console.log('Updating order status:', { orderId, url, payload, existingOrder: order });
     
     makeRequest('PUT', url, payload, callback);
 }
