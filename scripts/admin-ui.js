@@ -10,7 +10,6 @@ function init() {
     setupModal();
     setupForms();
     setupFilters();
-    
     loadAllData();
 }
 

@@ -68,23 +68,24 @@ function loadStatsFromAPI() {
     });
 }
 
+// ✅ تحميل كل البيانات دفعة واحدة عند تحميل الصفحة
 function loadAllData() {
     loadDrinksFromAPI();
     loadOrdersFromAPI();
     loadStatsFromAPI();
 }
 
-function saveDrink(drinkData, isEdit, drinkId, callback) {
+function saveDrinkToAPI(drinkData, isEdit, drinkId, callback) {
     const url    = isEdit ? `${drinksApiUrl}/${drinkId}` : drinksApiUrl;
     const method = isEdit ? 'PUT' : 'POST';
     makeRequest(method, url, drinkData, callback);
 }
 
-function deleteDrink(drinkId, callback) {
+function deleteDrinkFromAPI(drinkId, callback) {
     makeRequest('DELETE', `${drinksApiUrl}/${drinkId}`, null, callback);
 }
 
-function updateOrderStatus(orderId, newStatus, callback) {
+function updateOrderStatusAPI(orderId, newStatus, callback) {
     const url = `https://server.coffee.intelakah.com/api/orders/${orderId}/status`;
     makeRequest('PUT', url, { status: newStatus }, callback);
 }
