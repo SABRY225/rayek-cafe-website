@@ -1,45 +1,30 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المفضلة</title>
     <link rel="stylesheet" href="../css/fav.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
+    <header class="fav-header">
+        <a href="menu.html" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
-    <h1 style="color:antiquewhite; margin-right: 0%;">المفضلة</h1>
+        <h1 class="fav-title">
+            المفضلة <i class="fa-solid fa-heart" style="color: #d17842; font-size: 0.8em;"></i>
+        </h1>
+    </header>
+
     <div class="favorites-container" id="favoritesContainer">
     </div>
 
-    
-    <footer class="footer">
-       <a href="menu.html" class="footer-item" id="nav-home">
-        <i class="fas fa-home"></i>
-        <span>القائمة</span>
-    </a>
-   
-    <a href="cart.html" class="footer-item" id="nav-cart">
-        <div class="footer-icon-wrapper">
-            <i class="fas fa-shopping-cart"></i>
- 
-        </div>
-        <span>السلة</span>
-    </a>
-    <a href="fav.html" class="footer-item" id="nav-wishlist">
-        <i class="fas fa-heart"></i>
-        <span>المفضلة</span>
-    </a>
- 
-</footer>
-
     <script src="../scripts/fav.js"></script>
-    
+
 </body>
 
 </html>

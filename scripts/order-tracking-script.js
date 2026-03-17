@@ -12,6 +12,7 @@ circle.style.strokeDashoffset = circumference;
 
 let totalTime = parseFloat(order.orderTime) * 60;
 let currentTime = totalTime;
+let typeOrder = order.type;
 
 function setProgress(percent) {
     const offset = circumference - (percent / 100 * circumference);
@@ -30,7 +31,7 @@ function sendOrderFinished() {
     };
 
     const data = JSON.stringify({
-        type:"custom",
+        type:typeOrder,
         status: "completed"
     });
 

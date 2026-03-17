@@ -7,16 +7,16 @@
   --text-dim: #8e8e8e;
   --cup-border: #4e342e;
   --primary-color: #d35400;
-    --primary-light: rgba(211, 84, 0, 0.1);
-    --bg-glass: rgba(255, 255, 255, 0.8); /* للوضع الفاتح */
-    --border-color: rgba(211, 84, 0, 0.1);
-    --nav-height: 80px;
+  --primary-light: rgba(211, 84, 0, 0.1);
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(211, 84, 0, 0.1);
+  --nav-height: 80px;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   margin: 0;
   padding: 20px;
 }
@@ -27,47 +27,43 @@ body {
 }
 
 .main-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    direction: rtl;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  direction: rtl;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border-color);
 }
-
 
 .nav-right-section {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
-/* اللوجو */
 .logo-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 8px;
-    color: white;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  color: white;
 }
 
 .logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    letter-spacing: -0.02em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: -0.02em;
 }
 
-
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -78,14 +74,12 @@ body {
 .highlight {
   color: var(--accent);
 }
-/* Main Layout */
 .main-content {
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 40px;
 }
 
-/* Summary Card (Sticky) */
 .summary-card {
   background: var(--card-bg);
   padding: 30px;
@@ -97,7 +91,6 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-/* Cup Visualization */
 .visualizer {
   background: #251a15;
   padding: 40px;
@@ -162,7 +155,6 @@ body {
   z-index: 1;
 }
 
-/* Pricing & Details */
 .details .row {
   display: flex;
   justify-content: space-between;
@@ -185,7 +177,6 @@ body {
   font-weight: bold;
 }
 
-/* Options Steps */
 .step {
   margin-bottom: 50px;
   background: rgba(255, 255, 255, 0.02);
@@ -217,7 +208,6 @@ body {
   gap: 15px;
 }
 
-/* Card Styling - Professional Icons */
 .card {
   background: var(--card-bg);
   padding: 20px 10px;
@@ -237,7 +227,7 @@ body {
 }
 
 .icon {
-  font-size: 32px; /* Font Awesome Icons */
+  font-size: 32px;
   margin-bottom: 12px;
   color: var(--accent);
   display: block;
@@ -287,14 +277,13 @@ body {
   }
 }
 
-/* الخلفية */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
   display: none;
   justify-content: center;
@@ -302,7 +291,6 @@ body {
   z-index: 999;
 }
 
-/* محتوى المودال */
 .modal-content {
   background: #ffffff;
   padding: 35px;
@@ -313,21 +301,19 @@ body {
   flex-direction: column;
   gap: 15px;
 
-  box-shadow: 
-  0 10px 25px rgba(0,0,0,0.2),
-  0 5px 10px rgba(0,0,0,0.1);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.1);
 
   animation: modalFade 0.35s ease;
 }
 
-/* عنوان */
-.modal-content h2{
+.modal-content h2 {
   color: #e67e22;
   font-size: 22px;
   margin-bottom: 5px;
 }
 
-/* الحقول */
 .modal-content input {
   width: 100%;
   padding: 12px;
@@ -338,19 +324,17 @@ body {
   transition: 0.25s;
 }
 
-.modal-content input:focus{
+.modal-content input:focus {
   border-color: #e67e22;
-  box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
 }
 
-/* الأزرار */
-.btns{
+.btns {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
 
-/* زر التأكيد */
 .modal-content button {
   flex: 1;
   padding: 12px;
@@ -361,35 +345,31 @@ body {
   transition: 0.25s;
 }
 
-.modal-content #btn-confirm{
+.modal-content #btn-confirm {
   background: #e67e22;
   color: white;
 }
 
-.modal-content #btn-confirm:hover{
+.modal-content #btn-confirm:hover {
   background: #cf6d17;
 }
 
-/* زر الإلغاء */
-.modal-content #btn-close{
-  background:#1c1c1c;
-  color:white;
+.modal-content #btn-close {
+  background: #1c1c1c;
+  color: white;
 }
 
-.modal-content #btn-close:hover{
-  background:#000;
+.modal-content #btn-close:hover {
+  background: #000;
 }
 
-
-
-/* Animation */
-@keyframes modalFade{
-  from{
-    opacity:0;
+@keyframes modalFade {
+  from {
+    opacity: 0;
     transform: translateY(-20px) scale(0.95);
   }
-  to{
-    opacity:1;
+  to {
+    opacity: 1;
     transform: translateY(0) scale(1);
   }
 }

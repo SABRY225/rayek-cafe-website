@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,124 +8,165 @@
     <link rel="stylesheet" href="../css/details.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <div id="main-content"></div>
+    <div id="loader-wrapper">
+        <div class="coffee-loader">
+            <div class="cup"></div>
+        </div>
+        <p>جاري تحضير التفاصيل...</p>
+    </div>
 
-    <script>
-        var param = new URLSearchParams(location.search);
-        var id = param.get('id');
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>تمت الإضافة بنجاح!</h2>
+            <p>هل تريد الذهاب إلى سلة المشتريات الآن؟</p>
+            <div class="modal-buttons">
+                <button onclick="window.location.href='cart.html'" class="go-to-cart">الذهاب للسلة</button>
+                <button onclick="window.location.href='menu.html'" class="continue-shopping">إكمال التسوق</button>
+            </div>
+        </div>
+        <script>
+            var param = new URLSearchParams(location.search);
+            var id = param.get('id');
 
-        var Xhr = new XMLHttpRequest();
-        Xhr.open("GET", "https://server.coffee.intelakah.com/api/drinks/" + id);
-        Xhr.responseType = "json";
-        Xhr.send();
+            var Xhr = new XMLHttpRequest();
+            Xhr.open("GET", "https://server.coffee.intelakah.com/api/drinks/" + id);
+            Xhr.responseType = "json";
+            Xhr.send();
 
-        Xhr.onload = function () {
-            var drink = Xhr.response;
+            Xhr.onload = function () {
+                var drink = Xhr.response;
+                const loader = document.getElementById("loader-wrapper");
+                if (loader) {
+                    setTimeout(() => {
+                        loader.style.display = "none";
+                    }, 500);
+                }
+                if (!drink) {
+                    document.body.innerHTML = "<h1 style='text-align:center; color:white; margin-top:50px;'>المشروب غير موجود</h1>";
+                    return;
+                }
 
-            if (!drink) {
-                document.body.innerHTML = "<h1 style='text-align:center; color:white; margin-top:50px;'>المشروب غير موجود</h1>";
-                return;
-            }
-
-
-            const drinkHTML = `
+                let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                let isFav = favorites.some(f => f.id == drink.id);
+                const drinkHTML = `
             <div id="drink-container">
-                <img src="${drink.image}" class="drink-image" alt="${drink.name}">
-                
-                <div class="content-wrapper">
-                    <h1 class="drink_name">${drink.name}</h1>
-                    <p class="drink_discrption">${drink.description}</p>
-                    
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <i class="fas fa-thermometer-half"></i>
-                            <span>النكهة</span>
-                            <p>${drink.syrup}</p>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-blender"></i>
-                            <span>الحليب</span>
-                            <p>${drink.milk || 'بدون'}</p>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-cookie-bite"></i>
-                            <span>إضافات</span>
-                            <p>${drink.toppings || 'سادة'}</p>
-                        </div>
-                    </div>
+        <div class="top-controls">
+            <a href="menu.html" class="back-btn"><i class="fas fa-chevron-right"></i></a>
+            <button id="favorite-btn" class="fav-btn ${isFav ? 'active' : ''}">
+                <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+            </button>
+        </div>
 
-                    <h4 class="drink-price">${drink.price} EGP</h4>
-
-                    <h2 class="detilsh1">الحجم</h2>
-                    <div class="size-buttons">
-                        <button class="size-btn">كبير</button>
-                        <button class="size-btn active">متوسط</button>
-                        <button class="size-btn">صغير</button>
-                    </div>
-
-                    <div class="cart-controls">
-                        <div class="quantity-selector">
-                            <button class="qty-btn" id="minus">-</button>
-                            <input type="number" id="qty-input" value="1" min="1" readonly>
-                            <button class="qty-btn" id="plus">+</button>
-                        </div>
-                        <button class="add-to-cart" id="addtocart">إضافة للسلة</button>
-                    </div>
+        <div class="image-section">
+            <img src="${drink.image}" class="drink-image" alt="${drink.name}">
+        </div>
+        
+        <div class="content-wrapper">
+            <h1 class="drink_name">${drink.name}</h1>
+            <p class="drink_discrption">${drink.description}</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span>النكهة</span>
+                    <p>${drink.syrup}</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-blender"></i>
+                    <span>الحليب</span>
+                    <p>${drink.milk || 'بدون'}</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-cookie-bite"></i>
+                    <span>إضافات</span>
+                    <p>${drink.toppings || 'سادة'}</p>
                 </div>
             </div>
 
-            <footer class="footer-nav">
-                <a href="menu.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>القائمة</span>
-                </a>
-                <a href="cart.html" class="nav-item">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>السلة</span>
-                </a>
-                <a href="fav.html" class="nav-item">
-                    <i class="fas fa-heart"></i>
-                    <span>المفضلة</span>
-                </a>
-            </footer>
+            <h4 class="drink-price">السعر : ${drink.price} EGP</h4>
+
+            <h2 class="detilsh1">الحجم</h2>
+            <div class="size-buttons">
+                <div class="size-btn">كبير</div>
+                <div class="size-btn active">متوسط</div>
+                <div class="size-btn">صغير</div>
+            </div>
+
+            <div class="cart-controls">
+                <div class="quantity-selector">
+                    <button class="qty-btn" id="minus">-</button>
+                    <input type="number" id="qty-input" value="1" min="1" readonly>
+                    <button class="qty-btn" id="plus">+</button>
+                </div>
+                <button class="add-to-cart" id="addtocart">
+                <i class="fa-solid fa-bag-shopping"></i>
+                إضافة للسلة
+                    </button>
+            </div>
+        </div>
+    </div>
+
             `;
+                document.getElementById("main-content").innerHTML = drinkHTML;
+                document.getElementById("favorite-btn").onclick = function () {
+                    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                    let index = favorites.findIndex(f => f.id == drink.id);
+                    const icon = this.querySelector('i');
 
-            document.getElementById("main-content").innerHTML = drinkHTML;
+                    if (index > -1) {
+                        favorites.splice(index, 1); // حذف
+                        this.classList.remove('active');
+                        icon.className = 'far fa-heart';
+                    } else {
+                        favorites.push(drink); // إضافة
+                        this.classList.add('active');
+                        icon.className = 'fas fa-heart';
+                    }
+                    localStorage.setItem("favorites", JSON.stringify(favorites));
+                };
+                // أزرار الكمية
+                document.getElementById("plus").onclick = () => {
+                    let qty = document.getElementById("qty-input");
+                    qty.value = parseInt(qty.value) + 1;
+                };
 
-            // أزرار الكمية
-            document.getElementById("plus").onclick = () => {
-                let qty = document.getElementById("qty-input");
-                qty.value = parseInt(qty.value) + 1;
-            };
+                document.getElementById("minus").onclick = () => {
+                    let qty = document.getElementById("qty-input");
+                    if (qty.value > 1) qty.value = parseInt(qty.value) - 1;
+                };
 
-            document.getElementById("minus").onclick = () => {
-                let qty = document.getElementById("qty-input");
-                if (qty.value > 1) qty.value = parseInt(qty.value) - 1;
-            };
+                document.getElementById("addtocart").onclick = function () {
+                    let quantity = parseInt(document.getElementById("qty-input").value);
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    let exist = cart.findIndex(item => item.id === drink.id);
 
-            // إضافة للسلة
-            document.getElementById("addtocart").onclick = function () {
-                let quantity = parseInt(document.getElementById("qty-input").value);
-                let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                let exist = cart.findIndex(item => item.id === drink.id);
-                
-                if (exist !== -1) {
-                    cart[exist].quantity += quantity;
-                } else {
-                    cart.push({
-                        id: drink.id,
-                        name: drink.name,
-                        image: drink.image,
-                        quantity: quantity,
-                        price: drink.price
-                    });
+                    if (exist !== -1) {
+                        cart[exist].quantity += quantity;
+                    } else {
+                        cart.push({
+                            id: drink.id,
+                            name: drink.name,
+                            image: drink.image,
+                            quantity: quantity,
+                            price: drink.price
+                        });
+                    }
+                    localStorage.setItem("cart", JSON.stringify(cart));
+
+                    document.getElementById("confirm-modal").style.display = "flex";
+                };
+
+                function closeModal() {
+                    document.getElementById("confirm-modal").style.display = "none";
                 }
-                localStorage.setItem("cart", JSON.stringify(cart));
-                window.location.href = "cart.html";
-            };
-        }
-    </script>
+            }
+        </script>
+    </div>
 </body>
+
 </html>
