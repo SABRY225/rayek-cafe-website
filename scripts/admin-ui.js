@@ -281,7 +281,12 @@ function filterOrders(status) {
     let filteredOrders = orders;
     
     if (status !== 'all') {
-        filteredOrders = orders.filter(order => order.status === status);
+        // ✅ فلترة حسب الـ status مع تعامل الـ custom orders
+        filteredOrders = orders.filter(order => {
+            // لو الـ order custom و status فاضي، اعتبره "preparing"
+            const orderStatus = order.status || (order.type === 'custom' ? 'preparing' : order.status);
+            return orderStatus === status;
+        });
     }
     
     renderOrders(filteredOrders);
@@ -395,8 +400,8 @@ function updateOrderStatus(id) {
             </div>
             <div class="current-status">
                 <span>الحالة الحالية:</span>
-                <span class="status-badge status-${order.status || 'pending'}">
-                    ${getStatusText(order.status || 'pending')}
+                <span class="status-badge status-${order.status || 'preparing'}">
+                    ${getStatusText(order.status || 'preparing')}
                 </span>
             </div>
             <div class="new-status">
@@ -406,6 +411,13 @@ function updateOrderStatus(id) {
                     <option value="ready" ${(order.status || 'preparing') === 'ready' ? 'selected' : ''}>جاهز</option>
                     <option value="completed" ${(order.status || 'preparing') === 'completed' ? 'selected' : ''}>مكتمل</option>
                     <option value="cencel" ${(order.status || 'preparing') === 'cencel' ? 'selected' : ''}>ملغي</option>
+                </select>
+            </div>
+            <div class="order-type">
+                <label for="type-select">نوع الطلب:</label>
+                <select id="type-select" class="type-select">
+                    <option value="custom" ${(order.type || 'custom') === 'custom' ? 'selected' : ''}>طلب مخصص</option>
+                    <option value="normal" ${(order.type || 'custom') === 'normal' ? 'selected' : ''}>طلب من المنيو</option>
                 </select>
             </div>
             <div class="status-actions">
@@ -420,8 +432,9 @@ function updateOrderStatus(id) {
 
 function saveOrderStatus(id) {
     const newStatus = document.getElementById('status-select').value;
+    const newType = document.getElementById('type-select').value;
     
-    updateOrderStatusAPI(id, newStatus, function(success, result) {
+    updateOrderStatusAPI(id, newStatus, newType, function(success, result) {
         if (success) {
             showNotification('تم تحديث حالة الطلب بنجاح', 'success');
             closeModal();
@@ -440,10 +453,10 @@ function loadStats() {
 
 function renderStats() {
     document.getElementById('total-orders').textContent = stats.totalOrders || 0;
-    document.getElementById('pending-orders').textContent = stats.pending || 0;
     document.getElementById('preparing-orders').textContent = stats.preparing || 0;
     document.getElementById('ready-orders').textContent = stats.ready || 0;
     document.getElementById('completed-orders').textContent = stats.completed || 0;
+    document.getElementById('cancelled-orders').textContent = stats.cencel || 0; // ✅ استخدام cencel للملغيات
 }
 
 // وظائف مساعدة
@@ -552,10 +565,35 @@ function showNotification(message, type = 'success') {
 // أنميشن الإشعارات
 const style = document.createElement('style');
 style.textContent = `
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        background: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        font-weight: 500;
+        animation: slideDown 0.3s ease;
+    }
+    
+    .edit-indicator {
+        background: #ff9800;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-right: 10px;
+        font-weight: 500;
+    }
+    
     @keyframes slideDown {
         from { transform: translate(-50%, -100%); opacity: 0; }
         to { transform: translate(-50%, 0); opacity: 1; }
     }
+    
     @keyframes slideUp {
         from { transform: translate(-50%, 0); opacity: 1; }
         to { transform: translate(-50%, -100%); opacity: 0; }
