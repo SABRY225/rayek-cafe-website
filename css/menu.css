@@ -5,10 +5,9 @@ body {
   margin: 0;
   padding: 20px;
   direction: rtl;
-  padding-top: 150px; /* مسافة لتعويض الـ Navbar الثابت */
+  padding-top: 150px;
 }
 
-/* تنسيق الناف بار الجديد */
 .navbar {
   position: fixed;
   top: 0;
@@ -33,7 +32,6 @@ body {
   gap: 10px;
 }
 
-/* أزرار السلة والمفضلة بنفس ستايلك */
 .action-btn {
   background-color: rgb(71, 68, 68);
   color: white;
@@ -66,15 +64,14 @@ body {
   border: 2px solid #0c0f14;
 }
 
-/* --- الأكواد الخاصة بك (بدون تغيير) --- */
 
 .searchSection {
-  flex-grow: 1; /* جعل البحث يأخذ المساحة المتبقية */
+  flex-grow: 1;
 }
 
 .searchBox {
   position: relative;
-  width: 100%; /* جعلها متوافقة مع الحاوية الجديدة */
+  width: 100%; 
   margin: 0 auto;
 }
 
@@ -284,7 +281,6 @@ body {
   font-weight: bold;
 }
 
-/* Coffee Cup Animation */
 .coffee-loader {
   width: 60px;
   height: 50px;
