@@ -117,7 +117,7 @@ body {
   padding: 10px 25px;
   border-radius: 10px;
   cursor: none;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .size-btn.active {
