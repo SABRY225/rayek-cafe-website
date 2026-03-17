@@ -60,10 +60,10 @@
                 <h2>إدارة الطلبات</h2>
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-status="all">الكل</button>
-                    <button class="filter-btn" data-status="pending">قيد الانتظار</button>
                     <button class="filter-btn" data-status="preparing">قيد التحضير</button>
                     <button class="filter-btn" data-status="ready">جاهز</button>
                     <button class="filter-btn" data-status="completed">مكتمل</button>
+                    <button class="filter-btn" data-status="cencel">ملغي</button>
                 </div>
             </div>
             
@@ -104,16 +104,6 @@
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon pending">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="pending-orders">0</h3>
-                        <p>طلبات قيد الانتظار</p>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
                     <div class="stat-icon preparing">
                         <i class="fas fa-blender"></i>
                     </div>
@@ -140,6 +130,16 @@
                     <div class="stat-info">
                         <h3 id="completed-orders">0</h3>
                         <p>طلبات مكتملة</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon cancelled">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="cancelled-orders">0</h3>
+                        <p>طلبات ملغية</p>
                     </div>
                 </div>
             </div>
@@ -275,6 +275,7 @@
         </div>
     </footer>
 
-    <script src="../scripts/admin.js"></script>
+    <script src="../scripts/adminApi.js"></script>
+    <script src="../scripts/admin-ui.js"></script>
 </body>
 </html>

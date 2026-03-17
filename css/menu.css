@@ -1,206 +1,325 @@
-
-
 body {
-    background-color: #0c0f14;
-    color: #ffffff;
-    font-family: 'Cairo', sans-serif;
-    margin: 0;
-    padding: 20px;
-    direction: rtl; 
+  background-color: #0c0f14;
+  color: #ffffff;
+  font-family: "Cairo", sans-serif;
+  margin: 0;
+  padding: 20px;
+  direction: rtl;
+  padding-top: 150px; /* مسافة لتعويض الـ Navbar الثابت */
 }
 
+/* تنسيق الناف بار الجديد */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0c0f14;
+  z-index: 1000;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  gap: 10px;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* أزرار السلة والمفضلة بنفس ستايلك */
+.action-btn {
+  background-color: rgb(71, 68, 68);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.action-btn:hover {
+  background-color: #d17842;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  background-color: #d17842;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  border: 2px solid #0c0f14;
+}
+
+/* --- الأكواد الخاصة بك (بدون تغيير) --- */
+
 .searchSection {
-    width: 100%;
-    margin-top: 20px;
-    
+  flex-grow: 1; /* جعل البحث يأخذ المساحة المتبقية */
 }
 
 .searchBox {
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
+  position: relative;
+  width: 100%; /* جعلها متوافقة مع الحاوية الجديدة */
+  margin: 0 auto;
 }
 
 #searchinput {
-    width: 100%;
-    height: 50px;
-    padding: 10px 40px;
-    border-radius: 10px;
-    border: none;
-    background-color: rgb(71, 68, 68);
-
-    color: white;
-    outline-style: none;
-    font-family: 'Cairo', sans-serif;
+  width: 100%;
+  height: 50px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(71, 68, 68);
+  color: white;
+  outline-style: none;
+  font-family: "Cairo", sans-serif;
 }
 
 .searchBox i {
-    position: absolute;
-    right: 12px; 
-    top: 50%;
-    transform: translateY(-50%);
-    color: #ccc;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
 }
 
 #searchinput:focus {
-    outline: 2px solid  #d17842;;
+  outline: 2px solid #d17842;
 }
 
 .filterSection {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
 }
 
-.butt1, .butt2, .buut3 {
-    padding: 8px 25px;
-    border-radius: 12px;
-    min-width: 80px;
-    height: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    background-color: #0c0f14;
-    color: #ffffff;
-    border: none;
-    transition: 0.3s;
-    font-family:Arial, Helvetica, sans-serif
+.butt1,
+.butt2,
+.buut3 {
+  padding: 8px 25px;
+  border-radius: 12px;
+  min-width: 80px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #0c0f14;
+  color: #ffffff;
+  border: none;
+  transition: 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
-.butt1:hover, .butt2:hover, .buut3:hover, .active-filter {
-    background-color: #d17842;
-    color: white;
+.butt1:hover,
+.butt2:hover,
+.buut3:hover,
+.active-filter {
+  background-color: #d17842;
+  color: white;
 }
-
-
-
-
-
-
-
 
 #DrinksContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-    padding: 30px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  padding: 30px 10px;
 }
 
 .card {
-    flex: 0 1 calc(20.33%); 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 25px;
-    padding: 12px;
-    text-decoration: none;
-    color: white;
-    transition: all 0.4s ;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  flex: 0 1 calc(20.33%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 25px;
+  padding: 12px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
+
 .card:hover {
-    transform: translateY(-10px);
-    border-color: #d17842;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  transform: translateY(-10px);
+  border-color: #d17842;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 300px;  
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 12px;
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 12px;
 }
 
 .card .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-
-
 .heart-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(12, 15, 20, 0.6);
-   
-    color: #ffffff;
-    width: 32px;
-    height: 32px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(12, 15, 20, 0.6);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .heart-icon:hover {
-    color: #ff4d4d;
-    background: white;
+  color: #ff4d4d;
+  background: white;
 }
 
 .card h3 {
-    font-size: 17px;
-    margin: 5px 10px 2px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+  font-size: 17px;
+  margin: 5px 10px 2px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .card .description {
-    font-size: 12px;
-    color: #8b8f94;
-    margin: 0 10px 15px;
-    line-height: 1.4;
-    height: 34px;
-  
+  font-size: 12px;
+  color: #8b8f94;
+  margin: 0 10px 15px;
+  line-height: 1.4;
+  height: 34px;
 }
 
 .price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5px 5px 10px;
-    margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px 5px 10px;
+  margin-top: auto;
 }
 
 .price-tag {
-    font-weight: 800;
-    font-size: 20px;
-    color: white;
+  font-weight: 800;
+  font-size: 20px;
+  color: white;
 }
 
 .price-tag span {
-    color: #d17842; 
-    font-size: 15px;
-    margin-right: 2px;
+  color: #d17842;
+  font-size: 15px;
+  margin-right: 2px;
 }
 
 .add-btn {
-    background: #d17842;
-    color: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(209, 120, 66, 0.3);
+  background: #d17842;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(209, 120, 66, 0.3);
 }
 
 .add-btn:hover {
+  background-color: white;
+  color: #d17842;
+}
 
-    background-color: white;
-    color: #d17842;
+/* Loader Container */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0c0f14;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader-wrapper p {
+  margin-top: 20px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+#loader-wrapper p span {
+  color: #d17842;
+  font-weight: bold;
+}
+
+/* Coffee Cup Animation */
+.coffee-loader {
+  width: 60px;
+  height: 50px;
+  border: 4px solid #fff;
+  border-radius: 0 0 15px 15px;
+  position: relative;
+}
+
+.coffee-loader::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 10px;
+  width: 12px;
+  height: 20px;
+  border: 4px solid #fff;
+  border-radius: 0 10px 10px 0;
+}
+
+.cup::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 0;
+  height: 80%;
+  background: #d17842;
+  animation: fill 2s linear infinite;
+}
+
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: calc(100% - 10px);
+  }
 }

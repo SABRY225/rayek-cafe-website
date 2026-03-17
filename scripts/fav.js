@@ -24,7 +24,7 @@ for(let i = 0; i < favorites.length; i++){
 
     let removeBtn = document.createElement("button");
     removeBtn.className = "remove-btn";
-    removeBtn.textContent = "إزالة";
+    removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i> إزالة';
 
     removeBtn.onclick = function(){
         favorites.splice(i, 1);

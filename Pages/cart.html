@@ -1,108 +1,200 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سلة التسوق</title>
+    <title>سلة التسوق | Coffee Shop</title>
     <link rel="stylesheet" href="../css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
 </head>
+
 <body>
 
-  
+    <header class="cart-header">
+        <a href="menu.html" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <h1 class="carttext">سلة التسوق</h1>
+        <div style="width: 40px;"></div>
+    </header>
 
-    <h1 class="carttext">سلة التسوق</h1>
     <hr class="hr">
 
     <div id="cart-container"></div>
-    <div class="total" id="total-price">السعر الكلي: 0 EGP</div>
-    <a href="order-tracking.html" class="completeorder"> إتمام الطلب</a>
 
- 
-<footer class="footer">
-       <a href="menu.html" class="footer-item" id="nav-home">
-        <i class="fas fa-home"></i>
-        <span>القائمة</span>
-    </a>
-   
-    <a href="cart.html" class="footer-item" id="nav-cart">
-        <div class="footer-icon-wrapper">
-            <i class="fas fa-shopping-cart"></i>
- 
-        </div>
-        <span>السلة</span>
-    </a>
-    <a href="fav.html" class="footer-item" id="nav-wishlist">
-        <i class="fas fa-heart"></i>
-        <span>المفضلة</span>
-    </a>
- 
-</footer>
+    <div id="cart-footer">
+        <div class="total" id="total-price">السعر الكلي: 0 EGP</div>
+        <button class="completeorder" id="checkout-btn"> إتمام الطلب </button>
+    </div>
 
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-content order-form">
+            <h3>تأكيد الطلب</h3>
+            <p style="text-align: center; color: #8b8f94; font-size: 13px; margin-bottom: 20px;">يرجى إدخال بياناتك
+                لتوصيل طلبك</p>
 
-<script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const cartContainer = document.getElementById("cart-container");
-const totalPriceEl = document.getElementById("total-price");
-
-
-
-function showcart() {
-    cartContainer.innerHTML = "";
-    let total = 0;
-    let totalItems = 0; 
-
-    for (let index = 0; index < cart.length; index++) {
-        let item = cart[index];
-        total += item.price * item.quantity;
-        totalItems += item.quantity;
-
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "cart-item";
-
-        itemDiv.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-            <div class="cart-item-info">
-                <h4>${item.name}</h4>
-                <p>السعر: ${item.price} EGP</p>
-
-                <div class="quantity-controls">
-                    <button onclick="decreaseQty(${index})">-</button>
-                    <input type="number" value="${item.quantity}" min="1" readonly>
-                    <button onclick="increaseQty(${index})">+</button>
+            <form id="checkout-form">
+                <div class="input-group">
+                    <label>الاسم بالكامل</label>
+                    <input type="text" id="customer-name" placeholder="أدخل اسمك" required>
                 </div>
-            </div>
-            <button class="remove-btn" onclick="removeItem(${index})">حذف</button>
-        `;
-        cartContainer.appendChild(itemDiv);
-    }
+                <div class="input-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="customer-phone" placeholder="مثال: 01012345678" required>
+                </div>
 
-    totalPriceEl.textContent = "السعر الكلي: " + total + " EGP";
-    document.getElementById('side-cart-count').textContent = totalItems;
-}
+                <div class="modal-buttons">
+                    <button type="submit" class="confirm-order-btn" id="submit-order-btn">
+                        <span id="btn-text">تأكيد وإرسال</span>
+                        <div id="btn-loader" class="loader-inner" style="display: none;"></div>
+                    </button>
+                    <button type="button" onclick="closeOrderModal()" class="cancel-btn">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-function increaseQty(index) {
-    cart[index].quantity += 1;
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showcart();
-}
 
-function decreaseQty(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-        localStorage.setItem("cart", JSON.stringify(cart));
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartContainer = document.getElementById("cart-container");
+        const totalPriceEl = document.getElementById("total-price");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        function showcart() {
+            cartContainer.innerHTML = "";
+            let total = 0;
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>سلتك فارغة حالياً..</p>
+                        <a href="menu.html" class="go-shop-btn">ابدأ التسوق الآن</a>
+                    </div>
+                `;
+                totalPriceEl.style.display = "none";
+                checkoutBtn.style.display = "none";
+                document.getElementById('side-cart-count').textContent = 0;
+                return;
+            }
+
+            totalPriceEl.style.display = "block";
+            checkoutBtn.style.display = "block";
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                totalItems += item.quantity;
+
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "cart-item";
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="price-tag">${item.price} EGP</p>
+                    </div>
+                    <div class="quantity-controls">
+                        <button onclick="decreaseQty(${index})"><i class="fas fa-minus"></i></button>
+                        <input type="number" value="${item.quantity}" readonly class ="quntitiycount">
+                        <button onclick="increaseQty(${index})"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${index})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                `;
+                cartContainer.appendChild(itemDiv);
+            });
+
+            totalPriceEl.textContent = "السعر الكلي: " + total + " EGP";
+            document.getElementById('side-cart-count').textContent = totalItems;
+        }
+
+        // التحكم في الكمية
+        function increaseQty(index) {
+            cart[index].quantity += 1;
+            updateStorage();
+        }
+
+        function decreaseQty(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                updateStorage();
+            }
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateStorage();
+        }
+
+        function updateStorage() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+            showcart();
+        }
+
+        checkoutBtn.onclick = () => {
+            document.getElementById("order-modal").style.display = "flex";
+        };
+
+        function closeOrderModal() {
+            document.getElementById("order-modal").style.display = "none";
+        }
+
+        // إرسال البيانات للباك إند
+        document.getElementById("checkout-form").onsubmit = function (e) {
+            e.preventDefault();
+
+            const btnText = document.getElementById("btn-text");
+            const btnLoader = document.getElementById("btn-loader");
+            const submitBtn = document.getElementById("submit-order-btn");
+
+            // تفعيل اللودر
+            btnText.style.display = "none";
+            btnLoader.style.display = "block";
+            submitBtn.disabled = true;
+
+            const orderData = {
+                customer_name: document.getElementById("customer-name").value,
+                customer_phone: document.getElementById("customer-phone").value,
+                items: cart,
+                total_amount: cart.reduce((s, i) => s + (i.price * i.quantity), 0)
+            };
+            console.log(orderData);
+
+            fetch("https://server.coffee.intelakah.com/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(orderData)
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error("Request failed");
+                    }
+                    return res.json(); // تحويل الرد
+                })
+                .then(data => {
+
+                    alert("تم استلام طلبك بنجاح! سيتم التواصل معك.");
+                    localStorage.removeItem("cart");
+                    localStorage.setItem('order', JSON.stringify(data.order));
+                    window.location.href = "order-tracking.html";
+
+                })
+                .catch(() => {
+                    alert("حدث خطأ ما. يرجى المحاولة مرة أخرى.");
+                })
+                .finally(() => {
+                    btnText.style.display = "block";
+                    btnLoader.style.display = "none";
+                    submitBtn.disabled = false;
+                });
+        };
+
         showcart();
-    }
-}
-
-function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showcart();
-}
-
-showcart();
-</script>
+    </script>
 </body>
+
 </html>

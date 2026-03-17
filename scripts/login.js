@@ -1,5 +1,4 @@
 document.getElementById("btnSubmit").addEventListener("click", function () {
-
   const btn = document.getElementById("btnSubmit");
   const emailsend = document.getElementById("email").value;
 
@@ -14,7 +13,6 @@ document.getElementById("btnSubmit").addEventListener("click", function () {
   xhr.send(JSON.stringify({ email: emailsend }));
 
   xhr.onload = function () {
-
     btn.disabled = false;
     btn.innerText = "تسجيل الدخول";
 
@@ -26,7 +24,5 @@ document.getElementById("btnSubmit").addEventListener("click", function () {
       localStorage.setItem("gmail", emailsend);
       window.location.href = `verify.html`;
     }
-
   };
-
 });
