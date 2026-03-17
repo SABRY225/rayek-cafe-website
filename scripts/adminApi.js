@@ -85,7 +85,41 @@ function deleteDrinkFromAPI(drinkId, callback) {
     makeRequest('DELETE', `${drinksApiUrl}/${drinkId}`, null, callback);
 }
 
-function updateOrderStatusAPI(orderId, newStatus, callback) {
+function updateOrderStatusAPI(orderId, newStatus, newType, callback) {
+    // ✅ تحقق من وجود الطلب
+    const order = orders.find(o => o.id === orderId);
+    if (!order) {
+        console.error('Order not found:', orderId);
+        if (callback) callback(false, new Error('Order not found'));
+        return;
+    }
+    
+    // ✅ تحقق من قيمة الـ status الصحيحة
+    const validStatuses = ["preparing", "ready", "completed", "cencel"];
+    if (!validStatuses.includes(newStatus)) {
+        console.error('Invalid status:', newStatus);
+        if (callback) callback(false, new Error(`Invalid status: ${newStatus}`));
+        return;
+    }
+    
+    // ✅ تحقق من قيمة الـ type الصحيحة
+    const validTypes = ["custom", "normal"];
+    if (!validTypes.includes(newType)) {
+        console.error('Invalid type:', newType);
+        if (callback) callback(false, new Error(`Invalid type: ${newType}`));
+        return;
+    }
+    
+    // ✅ جرب الـ endpoint الرئيسي: PUT /orders/{id}/status
     const url = `https://server.coffee.intelakah.com/api/orders/${orderId}/status`;
-    makeRequest('PUT', url, { status: newStatus }, callback);
+    
+    // ✅ استخدم الـ payload format الصحيح
+    const payload = { 
+        type: newType, // استخدم الـ type من الـ select
+        status: newStatus 
+    };
+    
+    console.log('Updating order status:', { orderId, url, payload, existingOrder: order });
+    
+    makeRequest('PUT', url, payload, callback);
 }
