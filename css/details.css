@@ -5,16 +5,14 @@ body {
   margin: 0;
   margin-top: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   direction: rtl;
 }
 
 #drink-container {
   width: 100%;
-  max-width: 1000px;
-  text-align: center;
   display: flex;
+  margin-right: 80px;
+  margin-top: 20px;
 }
 
 .drink-image {
@@ -23,11 +21,14 @@ body {
   object-fit: cover;
   border-radius: 0 0 40px 40px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  margin-top: 70px;
 }
 
 .content-wrapper {
   padding: 0px 20px;
   text-align: start;
+  margin-right: 50px;
+  margin-top: 50px;
 }
 
 .category-badge {
@@ -116,7 +117,7 @@ body {
   padding: 10px 25px;
   border-radius: 10px;
   cursor: none;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .size-btn.active {
@@ -221,7 +222,7 @@ body {
 }
 
 .modal-content {
-  background: #141921;
+  background: #1a0f0a;
   padding: 30px;
   border-radius: 25px;
   text-align: center;
@@ -295,8 +296,7 @@ body {
   width: 45px;
   height: 45px;
   border-radius: 12px;
-  background: rgba(12, 15, 20, 0.7); 
-  backdrop-filter: blur(5px);
+  background:#1a0f0a; 
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   display: flex;
@@ -306,7 +306,7 @@ body {
   cursor: pointer;
   transition: 0.3s;
   font-size: 18px;
-}
+margin-top: -10px;}
 
 .fav-btn.active {
   color: #ff4d4d; 
@@ -382,3 +382,14 @@ body {
     width: calc(100% - 10px);
   }
 }
+
+
+
+
+
+
+
+
+
+
+

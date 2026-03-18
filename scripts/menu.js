@@ -34,7 +34,7 @@ function Displaydrinks(drink) {
     heartIcon.className = "heart-icon";
     heartIcon.innerHTML = "❤";
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
 
     let exist = favorites.find((fav) => fav.id === item.id);
     if (exist) {

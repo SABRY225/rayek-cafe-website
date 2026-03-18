@@ -62,7 +62,6 @@
         const totalPriceEl = document.getElementById("total-price");
         const checkoutBtn = document.getElementById("checkout-btn");
 
-        // عرض السلة
         function showcart() {
             cartContainer.innerHTML = "";
             let total = 0;
@@ -84,36 +83,34 @@
 
             totalPriceEl.style.display = "block";
             checkoutBtn.style.display = "block";
+for (let index = 0; index < cart.length; index++) {
+    let item = cart[index]; 
+    total += item.price * item.quantity;
+    totalItems += item.quantity;
 
-            cart.forEach((item, index) => {
-                total += item.price * item.quantity;
-                totalItems += item.quantity;
-
-                const itemDiv = document.createElement("div");
-                itemDiv.className = "cart-item";
-                itemDiv.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <p class="price-tag">${item.price} EGP</p>
-                    </div>
-                    <div class="quantity-controls">
-                        <button onclick="decreaseQty(${index})"><i class="fas fa-minus"></i></button>
-                        <input type="number" value="${item.quantity}" readonly>
-                        <button onclick="increaseQty(${index})"><i class="fas fa-plus"></i></button>
-                    </div>
-                    <button class="remove-btn" onclick="removeItem(${index})">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                `;
-                cartContainer.appendChild(itemDiv);
-            });
-
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "cart-item";
+    itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+        <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p class="price-tag">${item.price} EGP</p>
+        </div>
+        <div class="quantity-controls">
+            <button onclick="decreaseQty(${index})"><i class="fas fa-minus"></i></button>
+            <input type="number" value="${item.quantity}" readonly class="quntitiycount">
+            <button onclick="increaseQty(${index})"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${index})">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    `;
+    cartContainer.appendChild(itemDiv);
+}
             totalPriceEl.textContent = "السعر الكلي: " + total + " EGP";
             document.getElementById('side-cart-count').textContent = totalItems;
         }
 
-        // التحكم في الكمية
         function increaseQty(index) {
             cart[index].quantity += 1;
             updateStorage();
@@ -136,7 +133,6 @@
             showcart();
         }
 
-        // منطق النافذة المنبثقة والطلب
         checkoutBtn.onclick = () => {
             document.getElementById("order-modal").style.display = "flex";
         };
@@ -145,7 +141,6 @@
             document.getElementById("order-modal").style.display = "none";
         }
 
-        // إرسال البيانات للباك إند
         document.getElementById("checkout-form").onsubmit = function (e) {
             e.preventDefault();
 
@@ -153,7 +148,6 @@
             const btnLoader = document.getElementById("btn-loader");
             const submitBtn = document.getElementById("submit-order-btn");
 
-            // تفعيل اللودر
             btnText.style.display = "none";
             btnLoader.style.display = "block";
             submitBtn.disabled = true;
@@ -175,7 +169,7 @@
                     if (!res.ok) {
                         throw new Error("Request failed");
                     }
-                    return res.json(); // تحويل الرد
+                    return res.json(); 
                 })
                 .then(data => {
 
