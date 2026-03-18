@@ -147,7 +147,7 @@ document.getElementById("btn-confirm").addEventListener("click", function () {
       toppings: state.flavor.name,
       CustomerName: CustomerName,
       CustomerPhone: CustomerPhone,
-      orderReadyInMinutes: orderTime
+      orderTime: orderTime
     })
   );
 
