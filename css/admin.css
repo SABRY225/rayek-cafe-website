@@ -1,4 +1,3 @@
-/* استايل لوحة التحكم */
 body {
     background-color: var(--dark-color);
     color: var(--light-color);
@@ -7,7 +6,6 @@ body {
     padding-top: 80px;
 }
 
-/* الناف بار */
 .navbar {
     position: fixed;
     top: 0;
@@ -46,14 +44,12 @@ body {
     background: rgba(230, 126, 34, 0.1);
 }
 
-/* الحاوية الرئيسية */
 .admin-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* الأقسام */
 .admin-section {
     display: none;
     animation: fadeIn 0.3s ease-in-out;
@@ -83,7 +79,6 @@ body {
     color: var(--light-color);
 }
 
-/* الأزرار */
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -122,7 +117,6 @@ body {
     color: var(--dark-color);
 }
 
-/* فلتر الأزرار */
 .filter-buttons {
     display: flex;
     gap: 10px;
@@ -147,7 +141,6 @@ body {
     color: white;
 }
 
-/* الجداول */
 .table-container {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -184,7 +177,6 @@ body {
     border-bottom: none;
 }
 
-/* صور المشروبات */
 .drink-image {
     width: 50px;
     height: 50px;
@@ -193,7 +185,6 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* أزرار الإجراءات */
 .action-buttons {
     position: relative;
     display: flex;
@@ -225,7 +216,6 @@ body {
     background: rgba(230, 126, 34, 0.1);
 }
 
-/* القوائم المنسدلة */
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -284,7 +274,6 @@ body {
     text-align: center;
 }
 
-/* المودالات المخصصة */
 .order-details-modal {
     padding: 20px;
 }
@@ -364,7 +353,6 @@ body {
     color: var(--primary-color);
 }
 
-/* مودال تحديث الحالة */
 .status-update-modal {
     padding: 30px;
 }
@@ -459,7 +447,6 @@ body {
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* مودال الحذف */
 .delete-modal {
     text-align: center;
     padding: 30px;
@@ -521,7 +508,6 @@ body {
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* تحسينات المودال العام */
 .modal-body {
     max-height: 70vh;
     overflow-y: auto;
@@ -545,7 +531,6 @@ body {
     background: #d35400;
 }
 
-/* حالة الطلب */
 .status-badge {
     padding: 6px 12px;
     border-radius: 20px;
@@ -579,7 +564,6 @@ body {
     border: 1px solid #9b59b6;
 }
 
-/* الإحصائيات */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -645,7 +629,6 @@ body {
     font-size: 0.95rem;
 }
 
-/* النافذة المنبثقة */
 .modal {
     display: none;
     position: fixed;
@@ -704,7 +687,6 @@ body {
     color: var(--primary-color);
 }
 
-/* النموذج */
 #drink-form {
     padding: 24px;
 }
@@ -762,7 +744,6 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* التأثيرات */
 .fade-in {
     animation: fadeIn 0.3s ease-in-out;
 }
@@ -776,7 +757,6 @@ body {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* الفوتر */
 .footer {
     background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
     color: var(--light-color);
